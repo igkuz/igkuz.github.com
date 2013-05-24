@@ -1,0 +1,56 @@
+---
+layout: post
+title: "Тернарный оператор в php"
+date: 2012-04-28 16:31
+comments: true
+categories: 
+- php
+- программирование
+---
+
+Совсем недавно открыл для себя сокращенную запись тернарного оператора в
+php.
+Пример стандартной записи:
+
+``` php
+$a = 0; 
+$a = empty($a) ? 1 : 2; 
+var_dump($a);
+```
+
+Выведет: 1
+
+Если, к примеру, надо проверить переменную на пустоту и присвоить
+собственно её или же совершить какое-то действие
+стандартным способом получиться следующая запись:
+
+{% highlight ruby %}
+def parampam
+  a = 123
+end
+$a = 0; 
+$a = $a ? $a : 2; 
+var_dump($a);
+{% endhighlight %}
+
+Вернет: 2
+
+Сокращенной записью можно сделать 
+
+{% highlight php %}
+$a = $a ?: 2; 
+{% endhighlight %}
+
+Удобно использовать при возврате значения из функции
+
+{% highlight php %}
+static $instance = null; 
+function initBrowser() 
+{ 
+    return self::$instance ?: self::$instance = new Browser(); 
+} 
+$browser = $this->initBrowser()
+{% endhighlight %}
+
+Вызов функции initBrowser() вернет $instance, если он был определен
+ранее, или же присвоит ему новое значение и вернет его.
